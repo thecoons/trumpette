@@ -2,6 +2,7 @@
 
 import RPi.GPIO as GPIO
 import time
+import twitter
 
 GPIO.setmode(GPIO.BOARD)
 
