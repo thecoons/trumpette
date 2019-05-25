@@ -21,7 +21,7 @@ class TestDiodeModule(unittest.TestCase):
             diode_interface.HIGH
         )
 
-    def test_turn_on_diode(self):
+    def test_turn_off_diode(self):
         diode_interface = mock.Mock()
         expected_pin = 1
 
