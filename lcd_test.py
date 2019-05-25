@@ -2,6 +2,8 @@ from RPLCD.gpio import CharLCD
 import RPi.GPIO as GPIO
 import time
 
+from module.lcd.display import LCDDisplayManager
+
 
 lcd = CharLCD(
     cols=16,
@@ -13,7 +15,16 @@ lcd = CharLCD(
     numbering_mode=GPIO.BOARD,
 )
 
+display_manager = LCDDisplayManager(lcd, 'Hello Toi !!!!!')
+display_manager.display_frame()
+time.sleep(1)
+display_manager.message = 'Et toi aussi !!!'
+display_manager.display_frame()
+for i in range(20):
+    display_manager.message = str(i)
+    display_manager.display_frame()
 
-lcd.write_string('Salut gros chat :3')
-time.sleep(5)
+
+
 lcd.close(clear=False)
+
