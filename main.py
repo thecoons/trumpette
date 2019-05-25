@@ -2,17 +2,28 @@
 import twitter
 import time
 import RPi.GPIO as GPIO
-from unittest import mock
+
+from RPLCD.gpio import CharLCD
 
 from module.tweeter.manager import TweeterManager
 from module.diode.manager import DiodeManager
+from module.lcd.display import LCDDisplayManager
 
 GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(7, GPIO.OUT)
 diode_manager = DiodeManager(interface=GPIO, pin=7)
 
-
+lcd = CharLCD(
+    cols=16,
+    rows=2,
+    pin_rs=37,
+    pin_rw=35,
+    pin_e=33,
+    pins_data=[16, 11, 12, 15],
+    numbering_mode=GPIO.BOARD,
+)
+display_manager = LCDDisplayManager(lcd, '')
 
 api = twitter.Api(
     consumer_key='eaBcw0YCEnfVEu2pPuDPgJ161',
@@ -32,6 +43,8 @@ while True:
         last_tweet_id = tweet.id
         print(last_tweet_text)
         print(last_tweet_id)
+        display_manager.message = tweet.text
+        display_manager.display_frame()
         for tick in range(10):
             diode_manager.turn_on()
             time.sleep(1)
