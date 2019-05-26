@@ -1,0 +1,2 @@
+class FrameTooLong(Exception):
+    pass
