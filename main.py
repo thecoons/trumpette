@@ -8,6 +8,7 @@ from RPLCD.gpio import CharLCD
 from module.tweeter.manager import TweeterManager
 from module.diode.manager import DiodeManager
 from module.lcd.display import LCDDisplayManager
+from module.scene.models import MessageScene
 
 GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
@@ -24,6 +25,7 @@ lcd = CharLCD(
     numbering_mode=GPIO.BOARD,
 )
 display_manager = LCDDisplayManager(lcd, '')
+message_scene = MessageScene(lcd_manager=display_manager)
 
 api = twitter.Api(
     consumer_key='eaBcw0YCEnfVEu2pPuDPgJ161',
@@ -43,8 +45,8 @@ while True:
         last_tweet_id = tweet.id
         print(last_tweet_text)
         print(last_tweet_id)
-        display_manager.message = tweet.text
-        display_manager.display_frame()
+        message_scene.set_message(tweet.message)
+        message_scene.play()
         for tick in range(10):
             diode_manager.turn_on()
             time.sleep(1)

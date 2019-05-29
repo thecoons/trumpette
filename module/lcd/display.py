@@ -18,8 +18,8 @@ class LCDDisplayManager:
             self.frame,
         )
 
-    def _lcd_char_size(self):
+    def lcd_char_size(self):
         return self.lcd_interface.cols * self.lcd_interface.rows
 
     def _frame_validation(self, frame):
-        return len(frame) <= self._lcd_char_size()
+        return len(frame) <= self.lcd_char_size()
