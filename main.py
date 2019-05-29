@@ -24,6 +24,9 @@ lcd = CharLCD(
     pins_data=[16, 11, 12, 15],
     numbering_mode=GPIO.BOARD,
 )
+print(lcd.__dict__)
+print(lcd['cols'])
+print()
 display_manager = LCDDisplayManager(lcd, '')
 message_scene = MessageScene(lcd_manager=display_manager)
 
