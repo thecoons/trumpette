@@ -49,7 +49,7 @@ while True:
         last_tweet_id = tweet.id
         print(last_tweet_text)
         print(last_tweet_id)
-        message_scene.set_message(tweet.message)
+        message_scene.set_message(tweet.text)
         message_scene.play()
         for tick in range(10):
             diode_manager.turn_on()
