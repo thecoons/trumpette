@@ -26,7 +26,10 @@ lcd = CharLCD(
 )
 
 display_manager = LCDDisplayManager(lcd, '')
-message_scene = MessageScene(lcd_manager=display_manager)
+message_scene = MessageScene(
+    lcd_manager=display_manager,
+    elapse_time=5,
+)
 
 api = twitter.Api(
     consumer_key='eaBcw0YCEnfVEu2pPuDPgJ161',
